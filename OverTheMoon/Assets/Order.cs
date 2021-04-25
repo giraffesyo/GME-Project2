@@ -39,4 +39,10 @@ public class Order : MonoBehaviour
             GetComponentInParent<OrderManger>().ExpireOrder(Meal);
         }
     }
+
+    private void OnDestroy()
+    {
+        Debug.Log($"{Meal} has expired");
+        Destroy(gameObject);
+    }
 }

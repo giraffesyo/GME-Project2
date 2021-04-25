@@ -71,7 +71,7 @@ public class OrderManger : MonoBehaviour, IOrderQueueHandler
         }
         
         OutstandingOrders.Remove(order);
-        Destroy(order.gameObject);
+        Destroy(order);
     }
 
     public void ExpireOrder(string meal)
@@ -79,11 +79,12 @@ public class OrderManger : MonoBehaviour, IOrderQueueHandler
         var order = FindOrder(meal);
         if (order == null)
         {
+            Debug.Log($"Order {meal} not found");
             return;
         }
-
+        
         OutstandingOrders.Remove(order);
-        Destroy(order.gameObject);
+        Destroy(order);
     }
 
     void QueueOrders()

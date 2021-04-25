@@ -34,7 +34,7 @@ public class Timer : MonoBehaviour
 
     public bool HasExpired()
     {
-        return TimerIsRunning;
+        return !TimerIsRunning;
     }
 
     public string GetTimeDisplay()

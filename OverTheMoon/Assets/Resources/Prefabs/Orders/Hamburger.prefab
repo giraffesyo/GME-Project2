@@ -154,6 +154,6 @@ MonoBehaviour:
   - Beef
   - Cheese
   - TopBun
-  TimeUntilExpiration: 75
+  TimeUntilExpiration: 5
   CompletionValue: 10
   DisplayText: {fileID: 8023198218563855981}
