@@ -72,31 +72,31 @@ public class FridgeScript : MonoBehaviour
             case FoodCompoonentType.BOTTOM_BUN:
                 {
                     GameObject obj = Instantiate(BottomBunPrefab, BottomBunSpawnPoint.position, Quaternion.identity);
-                    obj.transform.eulerAngles = MeatPrefab.transform.eulerAngles;
+                    obj.transform.eulerAngles = BottomBunPrefab.transform.eulerAngles;
                     break;
                 }
             case FoodCompoonentType.TOP_BUN:
                 {
                     GameObject obj = Instantiate(TopBunPrefab, TopBunSpawnPoint.position, Quaternion.identity);
-                    obj.transform.eulerAngles = MeatPrefab.transform.eulerAngles;
+                    obj.transform.eulerAngles = TopBunPrefab.transform.eulerAngles;
                     break;
                 }
             case FoodCompoonentType.LETTUCE:
                 {
                     GameObject obj = Instantiate(LettucePrefab, LettuceSpawnPoint.position, Quaternion.identity);
-                    obj.transform.eulerAngles = MeatPrefab.transform.eulerAngles;
+                    obj.transform.eulerAngles = LettucePrefab.transform.eulerAngles;
                     break;
                 }
             case FoodCompoonentType.CHEESE:
                 {
                     GameObject obj = Instantiate(CheesePrefab, CheeseSpawnPoint.position, Quaternion.identity);
-                    obj.transform.eulerAngles = MeatPrefab.transform.eulerAngles;
+                    obj.transform.eulerAngles = CheesePrefab.transform.eulerAngles;
                     break;
                 }
             case FoodCompoonentType.TOMATO:
                 {
                     GameObject obj = Instantiate(TomatoPrefab, TomatoSpawnPoint.position, Quaternion.identity);
-                    obj.transform.eulerAngles = MeatPrefab.transform.eulerAngles;
+                    obj.transform.eulerAngles = TomatoPrefab.transform.eulerAngles;
                     break;
                 }
             default:
