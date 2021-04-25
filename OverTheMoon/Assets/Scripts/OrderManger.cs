@@ -57,34 +57,34 @@ public class OrderManger : MonoBehaviour, IOrderQueueHandler
         OutstandingOrders.Add(newOrder);
     }
 
-    private Order FindOrder(string meal)
+    private Order FindOrderIndex(string meal)
     {
-        return OutstandingOrders.FirstOrDefault(order => order.name == meal);
+        return OutstandingOrders.FirstOrDefault(order => order.Meal == meal);
     }
     
     public void SubmitOrder(string meal)
     {
-        var order = FindOrder(meal);
+        var order = FindOrderIndex(meal);
         if (order == null)
         {
             return;
         }
         
         OutstandingOrders.Remove(order);
-        Destroy(order);
+        Destroy(order.gameObject);
     }
 
     public void ExpireOrder(string meal)
     {
-        var order = FindOrder(meal);
+        Debug.Log($"Expiring {meal}");
+        var order = FindOrderIndex(meal);
         if (order == null)
         {
-            Debug.Log($"Order {meal} not found");
             return;
         }
         
         OutstandingOrders.Remove(order);
-        Destroy(order);
+        Destroy(order.gameObject);
     }
 
     void QueueOrders()

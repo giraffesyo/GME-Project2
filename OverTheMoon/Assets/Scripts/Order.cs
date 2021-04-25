@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class Order : MonoBehaviour
 {
-    [SerializeField] private string Meal;
+    [SerializeField] public string Meal;
     [SerializeField] public List<string> OrderedIngredients;
     [SerializeField] public float TimeUntilExpiration;
     [SerializeField] public int CompletionValue;
@@ -43,6 +43,5 @@ public class Order : MonoBehaviour
     private void OnDestroy()
     {
         Debug.Log($"{Meal} has expired");
-        Destroy(gameObject);
     }
 }
