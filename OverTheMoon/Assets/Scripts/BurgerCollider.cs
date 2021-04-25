@@ -7,18 +7,18 @@ public class BurgerCollider : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,12 +26,12 @@ public class BurgerCollider : MonoBehaviour
         Debug.Log("Colliding " + !other.gameObject.GetComponent<BurgerComponent>().isManipulated);
         GameObject BurgerComponentObject = gameObject.transform.parent.gameObject;
 
-        if (other.gameObject.tag == "BurgerComponent"  
+        if (other.gameObject.tag == "BurgerComponent"
             && (!other.gameObject.GetComponent<BurgerComponent>().isManipulated)
             && BurgerComponentObject.GetComponent<BurgerComponent>().Burger != null)
         {
             Debug.Log("Burger Collision");
-            
+
 
             if (BurgerComponentObject.GetComponent<BurgerComponent>().isTop)
             {
@@ -45,7 +45,7 @@ public class BurgerCollider : MonoBehaviour
                 other.gameObject.transform.parent = BurgerComponentObject.transform;
                 other.gameObject.transform.localPosition = new Vector3(0, 1, 0);
                 Destroy(other.gameObject.GetComponent<Rigidbody>());
-                
+
             }
         }
     }
