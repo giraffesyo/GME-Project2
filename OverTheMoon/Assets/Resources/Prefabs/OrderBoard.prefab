@@ -1018,6 +1018,7 @@ GameObject:
   - component: {fileID: 3980351497640264213}
   - component: {fileID: 3640327764382367590}
   - component: {fileID: 4227723321055786105}
+  - component: {fileID: 8189478375134126830}
   m_Layer: 0
   m_Name: OrderBoard
   m_TagString: Untagged
@@ -1277,6 +1278,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTetherWhenManipulating: 0
   IsBoundsHandles: 0
+--- !u!114 &8189478375134126830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3042159743682248930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c1e3f1b797ab3542921929e4d1efbcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ContentDisplay: {fileID: 3276089346259117846}
+  OrderCapacity: 10
+  TimeBetweenOrders: 5
+  AvailableOrders:
+  - {fileID: 8023198218563855979, guid: df218b6a05d02684c9252d095342b1b8, type: 3}
+  - {fileID: 8023198218563855979, guid: 6d84775be94b1b745bbb6a1111ea2af7, type: 3}
 --- !u!1 &3042159743869771676
 GameObject:
   m_ObjectHideFlags: 0
@@ -1880,7 +1899,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3276089346259117847}
   - component: {fileID: 3276089346259117844}
-  - component: {fileID: 3276089346259117842}
   - component: {fileID: 3276089346259117845}
   m_Layer: 5
   m_Name: Content
@@ -1922,23 +1940,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
---- !u!114 &3276089346259117842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3276089346259117846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c1e3f1b797ab3542921929e4d1efbcd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OrderCapacity: 10
-  TimeBetweenOrders: 5
-  AvailableOrders:
-  - {fileID: 8023198218563855979, guid: df218b6a05d02684c9252d095342b1b8, type: 3}
-  - {fileID: 8023198218563855979, guid: 6d84775be94b1b745bbb6a1111ea2af7, type: 3}
 --- !u!114 &3276089346259117845
 MonoBehaviour:
   m_ObjectHideFlags: 0

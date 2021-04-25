@@ -16,7 +16,7 @@ public interface IOrderQueueHandler : IEventSystemHandler
 public class OrderManger : MonoBehaviour, IOrderQueueHandler
 {
     // Where to spawn the tickets
-    // [SerializeField] private GameObject OrderBoard;
+    [SerializeField] private GameObject ContentDisplay;
     
     [SerializeField] private int OrderCapacity = 10;
     
@@ -52,7 +52,7 @@ public class OrderManger : MonoBehaviour, IOrderQueueHandler
 
     private void CreateOrder(Order order)
     {
-        var newOrder = Instantiate(order, gameObject.transform, false);
+        var newOrder = Instantiate(order, ContentDisplay.transform, false);
         newOrder.name = order.name;
         OutstandingOrders.Add(newOrder);
     }
