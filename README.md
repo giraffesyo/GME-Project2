@@ -10,4 +10,4 @@
     <td align="center"><a href="https://github.com/richard-paredes"><img src="https://avatars.githubusercontent.com/u/52340573?s=100&v=4" width="100px;" alt="Richard Paredes"/><br /><sub><b>Richard Paredes</b></sub></a></td>
     <td align="center"><a href="https://github.com/stwalsh4118"><img src="https://avatars.githubusercontent.com/u/40175938?s=100&v=4" width="100px;" alt="Sean Walsh"/><br /><sub><b>Sean Walsh</b></sub></a></td>
   </tr>
-</td>
+</table>
