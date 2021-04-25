@@ -46,7 +46,7 @@ public class Order : MonoBehaviour, IRecipe
     {
         CurrentValue = (int) Math.Ceiling(CompletionValue * ExpirationTimer.TimeRemaining / SecondsUntilExpiration);
         var timeDisplay = ExpirationTimer.GetTimeDisplay();
-        DisplayText.text = $"<size=2.5em><uppercase>{Meal}</uppercase> - {timeDisplay}\n<size=1.75em>{Ingredients}";
+        DisplayText.text = $"<size=2.5em><uppercase>{Meal}</uppercase> - <color=#FEDD00>{timeDisplay}</color>\n<size=1.75em>{Ingredients}";
 
         if (ExpirationTimer.HasExpired())
         {
