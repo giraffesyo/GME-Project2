@@ -26,7 +26,9 @@ public class Order : MonoBehaviour, IRecipe
 
     private Timer ExpirationTimer;
     private int CurrentValue;
-    private string Ingredients => "*" + string.Join("\n*", OrderedRecipeIngredients);
+
+    private string Ingredients =>
+        string.Join("\n", OrderedRecipeIngredients.Select((x, i) => $"{i + 1}. {x.name}"));
     private string Meal => gameObject.name;
 
     private void Awake()
@@ -44,7 +46,7 @@ public class Order : MonoBehaviour, IRecipe
     {
         CurrentValue = (int) Math.Ceiling(CompletionValue * ExpirationTimer.TimeRemaining / SecondsUntilExpiration);
         var timeDisplay = ExpirationTimer.GetTimeDisplay();
-        DisplayText.text = $"<size=2.5em>{Meal} - {timeDisplay}\n <indent=15%><size=1.5em>{Ingredients}</indent>";
+        DisplayText.text = $"<size=2.5em><uppercase>{Meal}</uppercase> - {timeDisplay}\n<size=1.75em>{Ingredients}";
 
         if (ExpirationTimer.HasExpired())
         {
