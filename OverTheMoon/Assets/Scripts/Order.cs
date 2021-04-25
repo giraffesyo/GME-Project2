@@ -14,13 +14,12 @@ public struct OrderSubmission
 
 public interface IRecipe
 {
-    public IEnumerable<string> GetIngredients();
+    public IEnumerable<GameObject> GetIngredients();
 }
 
 public class Order : MonoBehaviour, IRecipe
 {
-    [SerializeField] public string Meal;
-    [SerializeField] public List<string> OrderedRecipeIngredients;
+    [SerializeField] public List<GameObject> OrderedRecipeIngredients;
     [SerializeField] public float SecondsUntilExpiration;
     [SerializeField] public int CompletionValue;
     [SerializeField] private TextMeshProUGUI DisplayText;
@@ -28,6 +27,7 @@ public class Order : MonoBehaviour, IRecipe
     private Timer ExpirationTimer;
     private int CurrentValue;
     private string Ingredients => "*" + string.Join("\n*", OrderedRecipeIngredients);
+    private string Meal => gameObject.name;
 
     private void Awake()
     {
@@ -63,11 +63,11 @@ public class Order : MonoBehaviour, IRecipe
 
     private void OnDestroy()
     {
-        Debug.Log($"{Meal} has expired");
+        Debug.Log($"{Meal} has been destroyed");
     }
 
-    public IEnumerable<string> GetIngredients()
+    public IEnumerable<GameObject> GetIngredients()
     {
-        return new List<string>(OrderedRecipeIngredients);
+        return new List<GameObject>(OrderedRecipeIngredients);
     }
 }

@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Something about the timer
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6a84f857bec7e7345843ae29404c57ce, type: 2}
   m_sharedMaterial: {fileID: 21202819797275496, guid: 6a84f857bec7e7345843ae29404c57ce,
@@ -148,11 +148,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e014766847487c34cbaf889378ca1b17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Meal: Salad
-  OrderedIngredients:
-  - Lettuce
-  - Cucumber
-  - Tomato
-  SecondsUntilExpiration: 60
+  OrderedRecipeIngredients:
+  - {fileID: 5585868938327327599, guid: 6f7196f9ba734461bbca91d7335b77bf, type: 3}
+  - {fileID: 748716289993058345, guid: 68d29c2334cc74e208030f6f2cf1efa0, type: 3}
+  SecondsUntilExpiration: 40
   CompletionValue: 10
   DisplayText: {fileID: 8023198218563855981}

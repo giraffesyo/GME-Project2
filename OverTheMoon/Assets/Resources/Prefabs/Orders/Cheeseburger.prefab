@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8023198218563855981}
   - component: {fileID: 8023198218563855979}
   m_Layer: 5
-  m_Name: Hamburger
+  m_Name: Cheeseburger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,11 +61,12 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <size=2.5em><uppercase>Something about the timer</uppercase>
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6a84f857bec7e7345843ae29404c57ce, type: 2}
   m_sharedMaterial: {fileID: 21202819797275496, guid: 6a84f857bec7e7345843ae29404c57ce,
@@ -147,13 +148,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e014766847487c34cbaf889378ca1b17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Meal: Hamburger
-  OrderedIngredients:
-  - BottomBun
-  - Lettuce
-  - Beef
-  - Cheese
-  - TopBun
-  TimeUntilExpiration: 5
+  OrderedRecipeIngredients:
+  - {fileID: 1544203999811316309, guid: 1a7c7be56a96d4fd18791d0b7f4adb2c, type: 3}
+  - {fileID: 9107461739379842675, guid: f0ea995e09a314ffdbc251df32e1341f, type: 3}
+  - {fileID: 623772603211508840, guid: 2761bc21813884c569b8544655ab4989, type: 3}
+  - {fileID: 1114457128278635576, guid: 26952ed1615364440ac7a18fc9d21756, type: 3}
+  SecondsUntilExpiration: 60
   CompletionValue: 10
   DisplayText: {fileID: 8023198218563855981}

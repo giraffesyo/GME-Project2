@@ -9,7 +9,7 @@ using Random = System.Random;
 
 public interface IOrderQueueHandler : IEventSystemHandler
 {
-    OrderSubmission? SubmitOrder(IRecipe preparedOrder);
+    OrderSubmission? CheckAndSubmitFood(IRecipe preparedFood);
     void ExpireOrder(IRecipe expiredOrder);
 }
 
@@ -53,18 +53,23 @@ public class OrderManger : MonoBehaviour, IOrderQueueHandler
     private void CreateOrder(Order order)
     {
         var newOrder = Instantiate(order, gameObject.transform, false);
-
+        newOrder.name = order.name;
         OutstandingOrders.Add(newOrder);
     }
     
-    private Order FindOrder(IRecipe obj)
+    private Order FindOrder(IRecipe recipe)
     {
-        return OutstandingOrders.FirstOrDefault(order => order.GetIngredients().SequenceEqual(obj.GetIngredients()));
+        return OutstandingOrders.FirstOrDefault(order => DoRecipesMatch(order, recipe));
+    }
+
+    private bool DoRecipesMatch(IRecipe first, IRecipe second)
+    {
+        return first.GetIngredients().SequenceEqual(second.GetIngredients());
     }
     
-    public OrderSubmission? SubmitOrder(IRecipe preparedOrder)
+    public OrderSubmission? CheckAndSubmitFood(IRecipe preparedFood)
     {
-        var order = FindOrder(preparedOrder);
+        var order = FindOrder(preparedFood);
         if (order == null)
         {
             return null;

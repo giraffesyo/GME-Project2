@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class Burger : MonoBehaviour
+public class Burger : MonoBehaviour, IRecipe
 {
-
+    
     public List<GameObject> BurgerComponents;
     public GameObject Top;
     // Start is called before the first frame update
@@ -22,5 +23,10 @@ public class Burger : MonoBehaviour
     public void OnCollisionEnter(Collision collision)
     {
         //if(collision.)
+    }
+
+    public IEnumerable<GameObject> GetIngredients()
+    {
+        return new List<GameObject>(BurgerComponents);
     }
 }
