@@ -9,8 +9,8 @@ using Random = System.Random;
 
 public interface IOrderQueueHandler : IEventSystemHandler
 {
-    void SubmitOrder(string meal);
-    void ExpireOrder(string meal);
+    OrderSubmission? SubmitOrder(IRecipe preparedOrder);
+    void ExpireOrder(IRecipe expiredOrder);
 }
 
 public class OrderManger : MonoBehaviour, IOrderQueueHandler
@@ -37,12 +37,12 @@ public class OrderManger : MonoBehaviour, IOrderQueueHandler
         InvokeRepeating("QueueOrders", 3f, TimeBetweenOrders);
     }
 
-    bool ShouldCreateOrder()
+    private bool ShouldCreateOrder()
     {
         return OutstandingOrders.Count < OrderCapacity;
     }
 
-    void CreateRandomOrder()
+    private void CreateRandomOrder()
     {
         var randomIndex = RandomSelector.Next(AvailableOrders.Count);
         var order = AvailableOrders.ElementAt(randomIndex);
@@ -56,15 +56,28 @@ public class OrderManger : MonoBehaviour, IOrderQueueHandler
 
         OutstandingOrders.Add(newOrder);
     }
-
-    private Order FindOrderIndex(string meal)
+    
+    private Order FindOrder(IRecipe obj)
     {
-        return OutstandingOrders.FirstOrDefault(order => order.Meal == meal);
+        return OutstandingOrders.FirstOrDefault(order => order.GetIngredients().SequenceEqual(obj.GetIngredients()));
     }
     
-    public void SubmitOrder(string meal)
+    public OrderSubmission? SubmitOrder(IRecipe preparedOrder)
     {
-        var order = FindOrderIndex(meal);
+        var order = FindOrder(preparedOrder);
+        if (order == null)
+        {
+            return null;
+        }
+        
+        OutstandingOrders.Remove(order);
+        Destroy(order.gameObject);
+        return order.GetSubmissionInfo();
+    }
+
+    public void ExpireOrder(IRecipe expiredOrder)
+    {
+        var order = FindOrder(expiredOrder);
         if (order == null)
         {
             return;
@@ -74,29 +87,11 @@ public class OrderManger : MonoBehaviour, IOrderQueueHandler
         Destroy(order.gameObject);
     }
 
-    public void ExpireOrder(string meal)
-    {
-        Debug.Log($"Expiring {meal}");
-        var order = FindOrderIndex(meal);
-        if (order == null)
-        {
-            return;
-        }
-        
-        OutstandingOrders.Remove(order);
-        Destroy(order.gameObject);
-    }
-
-    void QueueOrders()
+    private void QueueOrders()
     {
         if (ShouldCreateOrder())
         {
             CreateRandomOrder();    
         }
-    }
-
-    public List<Order> GetOutstandingOrders()
-    {
-        return OutstandingOrders;
     }
 }

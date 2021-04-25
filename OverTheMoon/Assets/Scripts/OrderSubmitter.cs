@@ -1,14 +1,29 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class OrderSubmitter : MonoBehaviour
 {
-    [SerializeField] private GameObject OrderQueue; 
+    [SerializeField] private GameObject OrdersManager; 
     private void OnCollisionEnter(Collision other)
     {
-        ExecuteEvents.Execute<IOrderQueueHandler>(OrderQueue, null, ((handler, data) => handler.SubmitOrder(other.collider.name)));
+        var preparedOrder = other.gameObject.GetComponents<MonoBehaviour>().OfType<IRecipe>().FirstOrDefault();
+        if (preparedOrder == null) return;
+        
+        var submittedOrder = OrdersManager.GetComponent<OrderManger>().SubmitOrder(preparedOrder);
+        Debug.Log($"Submitting prepared order {other.collider.name}");
+        if (submittedOrder.HasValue)
+        {
+            AcceptSubmission(submittedOrder.Value, other.gameObject);
+        }
+    }
+
+    private void AcceptSubmission(OrderSubmission orderDetails, GameObject preparedOrder)
+    {
+        Debug.Log($"Accepted {orderDetails.Meal}");
+        Destroy(preparedOrder);
     }
 }
