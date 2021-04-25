@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &15818166596245589
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7931147535438678059}
+  - component: {fileID: 7917845391048064131}
+  m_Layer: 0
+  m_Name: Burger Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7931147535438678059
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15818166596245589}
+  m_LocalRotation: {x: 0.48958433, y: -0.40728128, z: -0.7073891, w: 0.30664283}
+  m_LocalPosition: {x: 0.002, y: -0.0763, z: -0.0517}
+  m_LocalScale: {x: 0.13682061, y: 0.00036955246, z: 0.13682061}
+  m_Children: []
+  m_Father: {fileID: 6514742892635802654}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7917845391048064131
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15818166596245589}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1544203999811316309
 GameObject:
   m_ObjectHideFlags: 0
@@ -15,7 +59,7 @@ GameObject:
   - component: {fileID: 4763583068440205344}
   - component: {fileID: 1543488545290025843}
   - component: {fileID: 3023000923797107923}
-  - component: {fileID: 2873736330763487096}
+  - component: {fileID: -3026933645614673325}
   m_Layer: 0
   m_Name: Bottom Bun
   m_TagString: Untagged
@@ -33,7 +77,8 @@ Transform:
   m_LocalRotation: {x: -0.48958433, y: 0.40728128, z: 0.7073891, w: 0.30664283}
   m_LocalPosition: {x: -0.6909624, y: 0.51089317, z: 0.2598231}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 7931147535438678059}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -170,7 +215,7 @@ MonoBehaviour:
   onHoverExited:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2873736330763487096
+--- !u!114 &-3026933645614673325
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,6 +224,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1544203999811316309}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad4f71a3c9658f347aef525c586377e8, type: 3}
+  m_Script: {fileID: 11500000, guid: b349e8463c825e541972e9830704c0f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BurgerComponents: []
+  Top: {fileID: 0}
