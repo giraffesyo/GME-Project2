@@ -3,7 +3,9 @@ guid: ad4f71a3c9658f347aef525c586377e8
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - BurgerPrefab: {fileID: 8330665860311798239, guid: 814b9c0f4b92f4582bac9d1ffc797ac7,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

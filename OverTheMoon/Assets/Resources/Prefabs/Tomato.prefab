@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6487086218166077281}
   - component: {fileID: -8426257701582439165}
   - component: {fileID: -487748253713859269}
+  - component: {fileID: -1430110555084378599}
   m_Layer: 0
   m_Name: Tomato
   m_TagString: BurgerComponent
@@ -31,9 +32,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 748716289993058345}
   m_LocalRotation: {x: -0.24613672, y: 0.6628852, z: 0.66288507, w: 0.24613675}
-  m_LocalPosition: {x: -0.260529, y: 0.84782475, z: -0.4968633}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 9, y: 9, z: 5}
-  m_Children: []
+  m_Children:
+  - {fileID: 7670786339489245562}
+  - {fileID: 5226094982225656444}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -132,6 +135,18 @@ MonoBehaviour:
   isTop: 0
   Burger: {fileID: 0}
   isManipulated: 0
+  foodType: 2
+  MeatPrefab: {fileID: 9107461739379842675, guid: f0ea995e09a314ffdbc251df32e1341f,
+    type: 3}
+  LettucePrefab: {fileID: 5585868938327327599, guid: 6f7196f9ba734461bbca91d7335b77bf,
+    type: 3}
+  TopBunPrefab: {fileID: 1114457128278635576, guid: 26952ed1615364440ac7a18fc9d21756,
+    type: 3}
+  BottomBunPrefab: {fileID: 1544203999811316309, guid: 1a7c7be56a96d4fd18791d0b7f4adb2c,
+    type: 3}
+  TomatoPrefab: {fileID: 748716289993058345}
+  CheesePrefab: {fileID: 623772603211508840, guid: 2761bc21813884c569b8544655ab4989,
+    type: 3}
 --- !u!114 &-8426257701582439165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,3 +201,131 @@ MonoBehaviour:
   onHoverExited:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-1430110555084378599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 748716289993058345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5afd5316c63705643b3daba5a6e923bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTetherWhenManipulating: 0
+  IsBoundsHandles: 0
+--- !u!1 &2462979535384724264
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5226094982225656444}
+  - component: {fileID: 5938594346546956798}
+  - component: {fileID: 7342627089849423797}
+  m_Layer: 0
+  m_Name: Burger Collider (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5226094982225656444
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2462979535384724264}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.0000000068312, y: -0, z: -0.0021}
+  m_LocalScale: {x: 0.015999764, y: 0.015999764, z: 0.0007421811}
+  m_Children: []
+  m_Father: {fileID: 5607547654050647043}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5938594346546956798
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2462979535384724264}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7342627089849423797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2462979535384724264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad4f71a3c9658f347aef525c586377e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &5616274465644210272
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7670786339489245562}
+  - component: {fileID: 6689334551852928388}
+  - component: {fileID: 7412347182606889336}
+  m_Layer: 0
+  m_Name: Burger Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7670786339489245562
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5616274465644210272}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.0000000068312, y: -0, z: 0.0013}
+  m_LocalScale: {x: 0.015999764, y: 0.015999764, z: 0.0007421811}
+  m_Children: []
+  m_Father: {fileID: 5607547654050647043}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6689334551852928388
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5616274465644210272}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7412347182606889336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5616274465644210272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad4f71a3c9658f347aef525c586377e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

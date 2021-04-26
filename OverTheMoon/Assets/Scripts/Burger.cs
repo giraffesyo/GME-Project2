@@ -5,19 +5,19 @@ using UnityEngine;
 
 public class Burger : MonoBehaviour, IRecipe
 {
-    
+
     public List<GameObject> BurgerComponents;
-    public GameObject Top;
+    public BurgerComponent Top;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void OnCollisionEnter(Collision collision)

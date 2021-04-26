@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum FoodCompoonentType
+public enum FridgeItemType
 {
     FIRST_MEAT,
     SECOND_MEAT,
@@ -47,53 +47,53 @@ public class FridgeScript : MonoBehaviour
     // spawn all the food items at once
     void SpawnAll()
     {
-        foreach (FoodCompoonentType food in System.Enum.GetValues(typeof(FoodCompoonentType)))
+        foreach (FridgeItemType food in System.Enum.GetValues(typeof(FridgeItemType)))
         {
             Spawn(food);
         }
     }
 
-    private void Spawn(FoodCompoonentType food)
+    private void Spawn(FridgeItemType food)
     {
         switch (food)
         {
-            case FoodCompoonentType.FIRST_MEAT:
+            case FridgeItemType.FIRST_MEAT:
                 {
                     GameObject obj = Instantiate(MeatPrefab, FirstMeatSpawnPoint.position, Quaternion.identity);
                     obj.transform.eulerAngles = MeatPrefab.transform.eulerAngles;
                     break;
                 }
-            case FoodCompoonentType.SECOND_MEAT:
+            case FridgeItemType.SECOND_MEAT:
                 {
                     GameObject obj = Instantiate(MeatPrefab, SecondMeatSpawnPoint.position, Quaternion.identity);
                     obj.transform.eulerAngles = MeatPrefab.transform.eulerAngles;
                     break;
                 }
-            case FoodCompoonentType.BOTTOM_BUN:
+            case FridgeItemType.BOTTOM_BUN:
                 {
                     GameObject obj = Instantiate(BottomBunPrefab, BottomBunSpawnPoint.position, Quaternion.identity);
                     obj.transform.eulerAngles = BottomBunPrefab.transform.eulerAngles;
                     break;
                 }
-            case FoodCompoonentType.TOP_BUN:
+            case FridgeItemType.TOP_BUN:
                 {
                     GameObject obj = Instantiate(TopBunPrefab, TopBunSpawnPoint.position, Quaternion.identity);
                     obj.transform.eulerAngles = TopBunPrefab.transform.eulerAngles;
                     break;
                 }
-            case FoodCompoonentType.LETTUCE:
+            case FridgeItemType.LETTUCE:
                 {
                     GameObject obj = Instantiate(LettucePrefab, LettuceSpawnPoint.position, Quaternion.identity);
                     obj.transform.eulerAngles = LettucePrefab.transform.eulerAngles;
                     break;
                 }
-            case FoodCompoonentType.CHEESE:
+            case FridgeItemType.CHEESE:
                 {
                     GameObject obj = Instantiate(CheesePrefab, CheeseSpawnPoint.position, Quaternion.identity);
                     obj.transform.eulerAngles = CheesePrefab.transform.eulerAngles;
                     break;
                 }
-            case FoodCompoonentType.TOMATO:
+            case FridgeItemType.TOMATO:
                 {
                     GameObject obj = Instantiate(TomatoPrefab, TomatoSpawnPoint.position, Quaternion.identity);
                     obj.transform.eulerAngles = TomatoPrefab.transform.eulerAngles;
