@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Burger : MonoBehaviour, IRecipe
+public class Burger : Recipe
 {
 
     public List<GameObject> BurgerComponents;
@@ -25,7 +25,7 @@ public class Burger : MonoBehaviour, IRecipe
         //if(collision.)
     }
 
-    public IEnumerable<GameObject> GetIngredients()
+    protected override IEnumerable<GameObject> GetIngredients()
     {
         return new List<GameObject>(BurgerComponents);
     }

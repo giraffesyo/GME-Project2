@@ -7,13 +7,16 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Random = System.Random;
 
-public interface IOrderQueueHandler : IEventSystemHandler
+public interface IOrderHandler : IEventSystemHandler
 {
-    OrderSubmission? CheckAndSubmitFood(IRecipe preparedFood);
-    void ExpireOrder(IRecipe expiredOrder);
+    List<Order> GetAllOutstandingOrders();
+
+    bool TryGetOutstandingOrder(Recipe preparedOrder, out Order outstandingOrder);
+    
+    bool RemoveOrder(Recipe orderToRemove);
 }
 
-public class OrderManger : MonoBehaviour, IOrderQueueHandler
+public class OrderManger : MonoBehaviour, IOrderHandler
 {
     // Where to spawn the tickets
     [SerializeField] private GameObject ContentDisplay;
@@ -42,14 +45,14 @@ public class OrderManger : MonoBehaviour, IOrderQueueHandler
         return OutstandingOrders.Count < OrderCapacity;
     }
 
-    private void CreateRandomOrder()
+    private Order SelectRandomAvailableOrder()
     {
         var randomIndex = RandomSelector.Next(AvailableOrders.Count);
         var order = AvailableOrders.ElementAt(randomIndex);
-        
-        CreateOrder(order);
-    }
 
+        return order;
+    }
+    
     private void CreateOrder(Order order)
     {
         var newOrder = Instantiate(order, ContentDisplay.transform, false);
@@ -57,46 +60,34 @@ public class OrderManger : MonoBehaviour, IOrderQueueHandler
         OutstandingOrders.Add(newOrder);
     }
     
-    private Order FindOrder(IRecipe recipe)
+    private Order FindOrder(Recipe recipe)
     {
-        return OutstandingOrders.FirstOrDefault(order => DoRecipesMatch(order, recipe));
-    }
-
-    private bool DoRecipesMatch(IRecipe first, IRecipe second)
-    {
-        return first.GetIngredients().SequenceEqual(second.GetIngredients());
-    }
-    
-    public OrderSubmission? CheckAndSubmitFood(IRecipe preparedFood)
-    {
-        var order = FindOrder(preparedFood);
-        if (order == null)
-        {
-            return null;
-        }
-        
-        OutstandingOrders.Remove(order);
-        Destroy(order.gameObject);
-        return order.GetSubmissionInfo();
-    }
-
-    public void ExpireOrder(IRecipe expiredOrder)
-    {
-        var order = FindOrder(expiredOrder);
-        if (order == null)
-        {
-            return;
-        }
-        
-        OutstandingOrders.Remove(order);
-        Destroy(order.gameObject);
+        return OutstandingOrders.FirstOrDefault(order => order.Matches(recipe));
     }
 
     private void QueueOrders()
     {
-        if (ShouldCreateOrder())
-        {
-            CreateRandomOrder();    
-        }
+        if (!ShouldCreateOrder()) return;
+        
+        var nextOrder = SelectRandomAvailableOrder();
+        CreateOrder(nextOrder);
+    }
+
+    public List<Order> GetAllOutstandingOrders()
+    {
+        return new List<Order>(OutstandingOrders);
+    }
+
+    public bool TryGetOutstandingOrder(Recipe preparedOrder, out Order outstandingOrder)
+    {
+        outstandingOrder = FindOrder(preparedOrder);
+
+        return outstandingOrder != null;
+    }
+    
+    public bool RemoveOrder(Recipe orderToRemove)
+    {
+        var order = FindOrder(orderToRemove);
+        return OutstandingOrders.Remove(order);
     }
 }

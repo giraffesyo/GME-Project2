@@ -12,12 +12,22 @@ public struct OrderSubmission
     public int Value;
 }
 
-public interface IRecipe
+public abstract class Recipe : MonoBehaviour
 {
-    public IEnumerable<GameObject> GetIngredients();
+    protected abstract IEnumerable<GameObject> GetIngredients();
+
+    public bool Matches(Recipe otherRecipe)
+    {
+        return GetIngredients()
+            .Select(x => x.name)
+            .SequenceEqual(
+                otherRecipe.GetIngredients()
+                .Select(x => x.name)
+            );
+    }
 }
 
-public class Order : MonoBehaviour, IRecipe
+public class Order : Recipe
 {
     [SerializeField] public List<GameObject> OrderedRecipeIngredients;
     [SerializeField] public float SecondsUntilExpiration;
@@ -27,9 +37,8 @@ public class Order : MonoBehaviour, IRecipe
     private Timer ExpirationTimer;
     private int CurrentValue;
 
-    private string Ingredients =>
-        string.Join("\n", OrderedRecipeIngredients.Select((x, i) => $"{i + 1}. {x.name}"));
-    private string Meal => gameObject.name;
+    private string Ingredients => string.Join("\n", OrderedRecipeIngredients.Select((x, i) => $"{i + 1}. {x.name}"));
+    private string CookedMealName => gameObject.name;
 
     private void Awake()
     {
@@ -46,11 +55,12 @@ public class Order : MonoBehaviour, IRecipe
     {
         CurrentValue = (int) Math.Ceiling(CompletionValue * ExpirationTimer.TimeRemaining / SecondsUntilExpiration);
         var timeDisplay = ExpirationTimer.GetTimeDisplay();
-        DisplayText.text = $"<size=2.5em><uppercase>{Meal}</uppercase> - <color=#FEDD00>{timeDisplay}</color>\n<size=1.75em>{Ingredients}";
+        DisplayText.text = $"<size=2.5em><uppercase>{CookedMealName}</uppercase> (Points: {CurrentValue}) - <color=#FEDD00>{timeDisplay}</color>\n<size=1.75em>{Ingredients}";
 
         if (ExpirationTimer.HasExpired())
         {
-            GetComponentInParent<OrderManger>().ExpireOrder(this);
+            GetComponentInParent<OrderManger>().RemoveOrder(this);
+            Destroy(gameObject);
         }
     }
 
@@ -58,17 +68,17 @@ public class Order : MonoBehaviour, IRecipe
     {
         return new OrderSubmission()
         {
-            Meal = Meal,
+            Meal = CookedMealName,
             Value = CurrentValue
         };
     }
 
     private void OnDestroy()
     {
-        Debug.Log($"{Meal} has been destroyed");
+        Debug.Log($"{CookedMealName} has been destroyed");
     }
 
-    public IEnumerable<GameObject> GetIngredients()
+    protected override IEnumerable<GameObject> GetIngredients()
     {
         return new List<GameObject>(OrderedRecipeIngredients);
     }

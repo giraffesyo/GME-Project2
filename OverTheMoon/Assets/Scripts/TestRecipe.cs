@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestRecipe : MonoBehaviour, IRecipe
+public class TestRecipe : Recipe
 {
     [SerializeField] private List<GameObject> Ingredients;
     // Start is called before the first frame update
@@ -17,7 +17,7 @@ public class TestRecipe : MonoBehaviour, IRecipe
         
     }
 
-    public IEnumerable<GameObject> GetIngredients()
+    protected override IEnumerable<GameObject> GetIngredients()
     {
         return new List<GameObject>(Ingredients);
     }

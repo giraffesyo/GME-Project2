@@ -7,48 +7,53 @@ using UnityEngine.EventSystems;
 
 public class OrderSubmitter : MonoBehaviour
 {
-    [SerializeField] private GameObject OrdersManager;
+    [SerializeField] private GameObject OrdersManagerObject;
     [SerializeField] private AudioClip SuccessSound;
 
     private AudioSource Audio;
+    private OrderManger OrdersManager;
+    
     private void Awake()
     {
-        if (!gameObject.TryGetComponent<AudioSource>(out Audio))
+        if (!TryGetComponent<AudioSource>(out Audio))
         {
             Audio = gameObject.AddComponent<AudioSource>();
+        }
+
+
+        if (!OrdersManagerObject.TryGetComponent<OrderManger>(out OrdersManager))
+        {
+            Debug.LogError("Missing the OrdersManagerObject or the OrdersManagerObject is missing the OrderManager script.");
         }
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        if (!other.gameObject.GetComponents<MonoBehaviour>().OfType<IRecipe>().Any())
+        var food = other.gameObject.GetComponents<MonoBehaviour>()
+                            .OfType<Recipe>()
+                            .FirstOrDefault();
+        if (food == null)
         {
             return;
         }
         
-        SubmitOrder(other.gameObject);
+        SubmitOrder(food);
     }
 
-    private void SubmitOrder(GameObject preparedOrder)
+    private void SubmitOrder(Recipe preparedOrder)
     {
-        var food = preparedOrder.GetComponents<MonoBehaviour>().OfType<IRecipe>().First();
-        var submittedOrder = OrdersManager.GetComponent<OrderManger>().CheckAndSubmitFood(food);
-        if (submittedOrder.HasValue)
+        if (OrdersManager.TryGetOutstandingOrder(preparedOrder, out var outstandingOrder))
         {
-            AcceptSubmission(submittedOrder.Value, preparedOrder);
+            AcceptSubmission(preparedOrder, outstandingOrder);
         }
     }
 
-    private void AcceptSubmission(OrderSubmission orderDetails, GameObject preparedOrder)
+    private void AcceptSubmission(Recipe preparedOrder, Recipe outstandingOrder)
     {
         PlaySound(SuccessSound);
-        StartCoroutine(DelayedFoodRemoval(preparedOrder));
-    }
-
-    private IEnumerator DelayedFoodRemoval(GameObject preparedOrder)
-    {
-        yield return new WaitForSeconds(1.25f);
-        Destroy(preparedOrder);
+        OrdersManager.RemoveOrder(outstandingOrder);
+        Destroy(preparedOrder.gameObject);
+        Destroy(outstandingOrder.gameObject);
     }
 
     private void PlaySound(AudioClip clip)
