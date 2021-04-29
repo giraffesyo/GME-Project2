@@ -896,6 +896,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9061064814173435842, guid: a32b84d60d1ca4a678791ba9cbab92d8,
         type: 3}
+      propertyPath: RespawnTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9061064814173435842, guid: a32b84d60d1ca4a678791ba9cbab92d8,
+        type: 3}
       propertyPath: MeatSpawnPoint
       value: 
       objectReference: {fileID: 505259868}

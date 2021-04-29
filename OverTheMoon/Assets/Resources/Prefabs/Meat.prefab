@@ -71,6 +71,7 @@ GameObject:
   - component: {fileID: 2147033064}
   - component: {fileID: 2147033063}
   - component: {fileID: 2147033062}
+  - component: {fileID: 3787896459751750150}
   m_Layer: 0
   m_Name: Meat
   m_TagString: Untagged
@@ -105,6 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50316eae84b8554429d48a9ece2b1f90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HasBeenManipulated: 0
   isManipulated: 0
   foodType: 0
   MeatPrefab: {fileID: 910016387258734053}
@@ -226,6 +228,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTetherWhenManipulating: 0
   IsBoundsHandles: 0
+--- !u!114 &3787896459751750150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910016387258734053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6adf0025efa6b8b4d819d2b31f30cc60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3551181729984530228
 GameObject:
   m_ObjectHideFlags: 0
