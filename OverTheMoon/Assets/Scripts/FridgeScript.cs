@@ -60,42 +60,49 @@ public class FridgeScript : MonoBehaviour
             case FridgeItemType.FIRST_MEAT:
                 {
                     GameObject obj = Instantiate(MeatPrefab, FirstMeatSpawnPoint.position, Quaternion.identity);
+                    obj.name = MeatPrefab.name;
                     obj.transform.eulerAngles = MeatPrefab.transform.eulerAngles;
                     break;
                 }
             case FridgeItemType.SECOND_MEAT:
                 {
                     GameObject obj = Instantiate(MeatPrefab, SecondMeatSpawnPoint.position, Quaternion.identity);
+                    obj.name = MeatPrefab.name;
                     obj.transform.eulerAngles = MeatPrefab.transform.eulerAngles;
                     break;
                 }
             case FridgeItemType.BOTTOM_BUN:
                 {
                     GameObject obj = Instantiate(BottomBunPrefab, BottomBunSpawnPoint.position, Quaternion.identity);
+                    obj.name = BottomBunPrefab.name;
                     obj.transform.eulerAngles = BottomBunPrefab.transform.eulerAngles;
                     break;
                 }
             case FridgeItemType.TOP_BUN:
                 {
                     GameObject obj = Instantiate(TopBunPrefab, TopBunSpawnPoint.position, Quaternion.identity);
+                    obj.name = TopBunPrefab.name;
                     obj.transform.eulerAngles = TopBunPrefab.transform.eulerAngles;
                     break;
                 }
             case FridgeItemType.LETTUCE:
                 {
                     GameObject obj = Instantiate(LettucePrefab, LettuceSpawnPoint.position, Quaternion.identity);
+                    obj.name = LettucePrefab.name;
                     obj.transform.eulerAngles = LettucePrefab.transform.eulerAngles;
                     break;
                 }
             case FridgeItemType.CHEESE:
                 {
                     GameObject obj = Instantiate(CheesePrefab, CheeseSpawnPoint.position, Quaternion.identity);
+                    obj.name = CheesePrefab.name;
                     obj.transform.eulerAngles = CheesePrefab.transform.eulerAngles;
                     break;
                 }
             case FridgeItemType.TOMATO:
                 {
                     GameObject obj = Instantiate(TomatoPrefab, TomatoSpawnPoint.position, Quaternion.identity);
+                    obj.name = TomatoPrefab.name;
                     obj.transform.eulerAngles = TomatoPrefab.transform.eulerAngles;
                     break;
                 }
