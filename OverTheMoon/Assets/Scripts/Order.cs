@@ -33,7 +33,9 @@ public class Order : Recipe
     [SerializeField] public float SecondsUntilExpiration;
     [SerializeField] public int CompletionValue;
     [SerializeField] private TextMeshProUGUI DisplayText;
+    [SerializeField] private int Bonus;
 
+    private int BonusTimeOffset = 10; 
     private Timer ExpirationTimer;
     private int CurrentValue;
 
@@ -51,11 +53,18 @@ public class Order : Recipe
         UpdateOrder();
     }
 
+    private int CalculateCurrentValue()
+    {
+        var bonus = Mathf.Clamp((int) Math.Ceiling(Bonus * (ExpirationTimer.TimeRemaining - BonusTimeOffset) / (SecondsUntilExpiration - BonusTimeOffset)), 0, Bonus);
+
+        return CompletionValue + bonus;
+    }
+
     private void UpdateOrder()
     {
-        CurrentValue = (int) Math.Ceiling(CompletionValue * ExpirationTimer.TimeRemaining / SecondsUntilExpiration);
+        CurrentValue = CalculateCurrentValue();
         var timeDisplay = ExpirationTimer.GetTimeDisplay();
-        DisplayText.text = $"<size=2.5em><uppercase>{CookedMealName}</uppercase> (Points: {CurrentValue}) - <color=#FEDD00>{timeDisplay}</color>\n<size=1.75em>{Ingredients}";
+        DisplayText.text = $"<size=2.5em><uppercase>{CookedMealName}</uppercase>  <color=#00FF00>${CurrentValue}</color> - <color=#FF0000>{timeDisplay}</color>\n<size=1.75em>{Ingredients}";
 
         if (ExpirationTimer.HasExpired())
         {

@@ -155,3 +155,4 @@ MonoBehaviour:
   SecondsUntilExpiration: 60
   CompletionValue: 10
   DisplayText: {fileID: 8023198218563855981}
+  Bonus: 5
