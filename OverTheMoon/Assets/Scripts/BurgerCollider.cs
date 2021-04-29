@@ -76,9 +76,9 @@ public class BurgerCollider : MonoBehaviour
             otherBurgerComponent.transform.SetParent(burger.transform, true);
             otherBurgerComponent.transform.SetAsLastSibling();
             // set the collided burger components position to some offset
-            Vector3 newPosition = thisBurgerComponent.transform.localPosition;
-            newPosition.y += componentOffset * burger.BurgerComponents.Count;
-            otherBurgerComponent.transform.localPosition = newPosition;
+            // Vector3 newPosition = thisBurgerComponent.transform.localPosition;
+            // newPosition.y += componentOffset * burger.BurgerComponents.Count;
+            // otherBurgerComponent.transform.localPosition = newPosition;
             // reset the rotations on the collided component
             // otherBurgerComponent.transform.rotation = Quaternion.identity;
             otherBurgerComponent.ResetToOriginalEulerAngles();
