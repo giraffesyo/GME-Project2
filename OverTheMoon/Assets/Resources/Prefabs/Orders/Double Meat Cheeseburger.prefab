@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8023198218563855983
+--- !u!1 &8814709867375306644
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,24 +8,24 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8023198218563855982}
-  - component: {fileID: 8023198218563855980}
-  - component: {fileID: 8023198218563855981}
-  - component: {fileID: 8023198218563855979}
+  - component: {fileID: 8814709867375306645}
+  - component: {fileID: 8814709867375306647}
+  - component: {fileID: 8814709867375306646}
+  - component: {fileID: 8814709867375306640}
   m_Layer: 5
-  m_Name: Cheeseburger
+  m_Name: Double Meat Cheeseburger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &8023198218563855982
+--- !u!224 &8814709867375306645
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8023198218563855983}
+  m_GameObject: {fileID: 8814709867375306644}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -38,21 +38,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 750, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &8023198218563855980
+--- !u!222 &8814709867375306647
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8023198218563855983}
+  m_GameObject: {fileID: 8814709867375306644}
   m_CullTransparentMesh: 0
---- !u!114 &8023198218563855981
+--- !u!114 &8814709867375306646
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8023198218563855983}
+  m_GameObject: {fileID: 8814709867375306644}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -136,13 +136,13 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &8023198218563855979
+--- !u!114 &8814709867375306640
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8023198218563855983}
+  m_GameObject: {fileID: 8814709867375306644}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e014766847487c34cbaf889378ca1b17, type: 3}
@@ -151,9 +151,10 @@ MonoBehaviour:
   OrderedRecipeIngredients:
   - {fileID: 4899323302845872992, guid: 1a7c7be56a96d4fd18791d0b7f4adb2c, type: 3}
   - {fileID: 910016387258734053, guid: f0ea995e09a314ffdbc251df32e1341f, type: 3}
+  - {fileID: 910016387258734053, guid: f0ea995e09a314ffdbc251df32e1341f, type: 3}
   - {fileID: 5919251800332751863, guid: 243c0c465862b4ebf92086ad0a2f935c, type: 3}
   - {fileID: 2566721156174667821, guid: 26952ed1615364440ac7a18fc9d21756, type: 3}
   SecondsUntilExpiration: 60
   CompletionValue: 10
-  DisplayText: {fileID: 8023198218563855981}
+  DisplayText: {fileID: 8814709867375306646}
   Bonus: 5
