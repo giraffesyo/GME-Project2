@@ -12,7 +12,7 @@ AWS.config.update({
   secretAccessKey: secretAccessKey,
 })
 
-let dynamodb = new AWS.DynamoDB()
+const dynamodb = new AWS.DynamoDB()
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'GET') {
@@ -26,9 +26,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       TableName: 'GME-Project-2-Table',
       Key: { Name: { S: name } },
     }
-    let request = dynamodb.getItem(params)
     try {
-      const data = await request.promise()
+      const data = await dynamodb.getItem(params).promise()
 
       if (!data.Item) {
         console.log(`=== User "${name}" does not exist. Bad request!`)
@@ -41,56 +40,53 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       console.log('===', item)
       return res.status(200).json(item)
     } catch (e) {
-      console.log(e)
-      console.log('=== Error invoking DynamoDB GetItem!')
-      return res.status(500).json({ message: 'Error 500 - Server Error' })
+      const message = `=== Error invoking DynamoDB GetItem!`
+      console.error(e)
+      console.error(message)
+      return res.status(500).json({ message })
     }
   } else if (req.method === 'POST') {
     console.log('\nPOST /user')
     console.log('=== Body: ', req.body)
     const { name, score } = req.body
     if (!(name && typeof score == 'number')) {
-      console.error(
-        `Returning 400 because name or score invalid, name: ${name}, score: ${score}`
-      )
-      return res.status(400).json({ message: 'Error 400 - Bad Request' })
+      const message = `Returning 400 because name or score invalid, name: ${name}, score: ${score}`
+      console.error(message)
+      return res.status(400).json({ message })
     }
 
     console.log('Ok.')
 
-    let params = {
+    const reqParams = {
       TableName: 'GME-Project-2-Table',
       Key: { Name: { S: name } },
     }
-    const request = dynamodb.getItem(params)
 
     try {
-      const data = await request.promise()
+      const data = await dynamodb.getItem(reqParams).promise()
 
       if (!data.Item) throw 'User does not exist'
       console.log(`=== User "${name}" exists. Updating user...`)
       console.log('=== Current DB Entry: ', data.Item)
 
-      const params2 = {
+      const setParams = {
         TableName: 'GME-Project-2-Table',
         Key: { Name: { S: name } },
         ExpressionAttributeValues: { ':score': { N: score } },
         UpdateExpression: 'SET Score = :score',
       }
-      let request2 = dynamodb.updateItem(params2)
-      await request2
-        .promise()
-        .then((data) => {
-          console.log(`=== User "${name}" has been successfully updated!`)
-          return res.status(200).json({
-            message: `User "${name}" has been successfully updated!`,
-          })
+
+      try {
+        await dynamodb.updateItem(setParams).promise()
+        console.log(`=== User "${name}" has been successfully updated!`)
+        return res.status(200).json({
+          message: `User "${name}" has been successfully updated!`,
         })
-        .catch((err) => {
-          console.log(err)
-          console.log('=== Error invoking DynamoDB UpdateItem!')
-          return res.status(500).json({ message: 'Error 500 - Server Error' })
-        })
+      } catch (err) {
+        console.error(err)
+        console.error('=== Error invoking DynamoDB UpdateItem!')
+        return res.status(500).json({ message: 'Error 500 - Server Error' })
+      }
     } catch (err) {
       console.log(`=== User "${name}" does not exist. Creating user...`)
 
@@ -98,18 +94,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         Name: name,
         Score: score,
       })
-      const params2 = { TableName: 'GME-Project-2-Table', Item: item }
-      let request = dynamodb.putItem(params2)
+      const setParams = { TableName: 'GME-Project-2-Table', Item: item }
       try {
-        const data = await request.promise()
-
+        await dynamodb.putItem(setParams).promise()
         console.log(`=== User "${name}" has been successfully updated!`)
         return res.status(200).json({
           message: `User "${name}" has been successfully created!`,
         })
       } catch (err) {
-        console.log(err)
-        console.log('=== Error invoking DynamoDB PutItem!')
+        console.error(err)
+        console.error('=== Error invoking DynamoDB PutItem!')
         return res.status(500).json({ message: 'Error 500 - Server Error' })
       }
     }
