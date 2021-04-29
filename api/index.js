@@ -52,7 +52,12 @@ app.post("/user", async (req, res) => {
     console.log("\nPOST /user");
     console.log("=== Body: ", req.body)
     const { name, score } = req.body;
-    if ( !(name && score) ) res.status(400).send({ message: "Error 400 - Bad Request" });
+    if ( !(name && score) ) 
+    {
+        res.status(400).send({ message: "Error 400 - Bad Request" });
+    }
+
+    console.log("Ok.")
     
     let params = { TableName: "GME-Project-2-Table", Key: { Name: { S: name } } };
     let request = dynamodb.getItem(params);
