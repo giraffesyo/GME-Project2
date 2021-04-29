@@ -17,10 +17,11 @@ public enum FoodType
 
 public class BurgerComponent : MonoBehaviour
 {
+    public bool HasBeenManipulated = false;
     public bool isManipulated = false;
     // Start is called before the first frame update
     public FoodType foodType;
-
+    
     [SerializeField]
     private GameObject MeatPrefab;
     [SerializeField]
@@ -91,6 +92,7 @@ public class BurgerComponent : MonoBehaviour
     public void setManipulated()
     {
         isManipulated = !isManipulated;
+        HasBeenManipulated = true;
         // Debug.Log("Change Manipulation State " + isManipulated);
     }
 }

@@ -380,7 +380,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8964922829831336244}
   m_Layer: 0
-  m_Name: Bottom Bun
+  m_Name: Burger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -759,8 +759,7 @@ MonoBehaviour:
   TopBunSpawnPoint: {fileID: 8964922829831616907}
   BottomBunSpawnPoint: {fileID: 8964922829831336244}
   LettuceSpawnPoint: {fileID: 8964922828735209470}
-  FirstMeatSpawnPoint: {fileID: 8964922830579524706}
-  SecondMeatSpawnPoint: {fileID: 8964922829673831338}
+  MeatSpawnPoint: {fileID: 8964922830579524706}
   TomatoSpawnPoint: {fileID: 8964922829614878710}
   CheeseSpawnPoint: {fileID: 8964922829295336483}
   MeatPrefab: {fileID: 910016387258734053, guid: f0ea995e09a314ffdbc251df32e1341f,
@@ -769,7 +768,7 @@ MonoBehaviour:
     type: 3}
   TopBunPrefab: {fileID: 2566721156174667821, guid: 26952ed1615364440ac7a18fc9d21756,
     type: 3}
-  BottomBunPrefab: {fileID: 4899323302845872992, guid: 1a7c7be56a96d4fd18791d0b7f4adb2c,
+  BottomBunPrefab: {fileID: 8330665860311798239, guid: 814b9c0f4b92f4582bac9d1ffc797ac7,
     type: 3}
   TomatoPrefab: {fileID: 3769304495648172534, guid: 68d29c2334cc74e208030f6f2cf1efa0,
     type: 3}
