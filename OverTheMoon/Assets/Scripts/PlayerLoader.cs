@@ -12,13 +12,15 @@ using Newtonsoft.Json.Serialization;
 using UnityEngine;
 using UnityEngine.Networking;
 
+
+
 [Serializable]
 public class Player
 {
     public string Name { get; set; }
-    
+
     public int Score { get; set; }
-    
+
     // public override string ToString()
     // {
     //     string output = username + "\n";
@@ -32,11 +34,13 @@ public class Player
 public class PlayerLoader : MonoBehaviour
 {
     public static PlayerLoader Instance;
-    
+
+    // private string API_URL = "http://localhost:3000/api/user";
+    private string API_URL = "https://overthemoon.giraffesyo.dev/api/user";
     private Player player;
 
     public string Username => player.Name;
-    
+
     private async void Awake()
     {
         Instance = this;
@@ -49,40 +53,41 @@ public class PlayerLoader : MonoBehaviour
     private async Task GetOrCreatePlayer(string username)
     {
         // StartCoroutine(FetchPlayer(username));
-        await SavePlayer(new Player() {Name = "test3", Score = 0});
+        await SavePlayer(new Player() { Name = "test3", Score = 0 });
     }
 
     private IEnumerator FetchPlayer(string username)
     {
-        var req = UnityWebRequest.Get($"https://fsxg5i1hzl.execute-api.us-east-1.amazonaws.com/prod/user?name={Uri.EscapeDataString(username)}");
+        var req = UnityWebRequest.Get($"{API_URL}?name={Uri.EscapeDataString(username)}");
         yield return req.SendWebRequest();
         player = JsonConvert.DeserializeObject<Player>(req.downloadHandler.text);
-        
+
         Debug.Log($"Successfully retrieved player info: {req.downloadHandler.text}");
     }
 
     private async Task SavePlayer(Player playerToSave)
     {
         if (playerToSave == null) return;
-        
+
         var playerContent = JsonConvert.SerializeObject(playerToSave, new JsonSerializerSettings() { ContractResolver = new DefaultContractResolver() { NamingStrategy = new CamelCaseNamingStrategy() } });
         // https://fsxg5i1hzl.execute-api.us-east-1.amazonaws.com/prod
-        var req = WebRequest.Create(Uri.EscapeUriString("https://fsxg5i1hzl.execute-api.us-east-1.amazonaws.com/prod/user"));
+        var req = WebRequest.Create(Uri.EscapeUriString(API_URL));
         req.ContentType = "application/json; charset=utf-8";
         req.Method = "POST";
-        using (var streamWriter = new StreamWriter(req.GetRequestStream())) {
+        using (var streamWriter = new StreamWriter(req.GetRequestStream()))
+        {
             streamWriter.Write(playerContent);
             streamWriter.Flush();
         }
 
-        var res = (HttpWebResponse) await req.GetResponseAsync();
+        var res = (HttpWebResponse)await req.GetResponseAsync();
         var readStream = new StreamReader(res.GetResponseStream());
         if (res.StatusCode == HttpStatusCode.OK)
         {
-            
+
             string jsonResponse = readStream.ReadToEnd();
-            Debug.Log($"Successfully saved player info {jsonResponse}");   
+            Debug.Log($"Successfully saved player info {jsonResponse}");
         }
     }
-    
+
 }
