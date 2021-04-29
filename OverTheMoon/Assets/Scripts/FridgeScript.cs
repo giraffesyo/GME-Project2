@@ -96,7 +96,7 @@ public class FridgeScript : MonoBehaviour
             }
         }
 
-        var foodPrefabs = foodsToSpawn.Select(x => PrefabsToSpawn.FirstOrDefault(y => x.name == y.name))
+        var foodPrefabs = foodsToSpawn.Select(x => PrefabsToSpawn.FirstOrDefault(y => x.name.Replace("Raw", "").Replace("Burnt", "") == y.name))
             .Where(x => x != null);
         SpawnedFood = SpawnedFood.Where(x => !foodsToSpawn.Contains(x)).ToList();
         foreach (var foodToSpawn in foodPrefabs)

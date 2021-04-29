@@ -240,6 +240,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6adf0025efa6b8b4d819d2b31f30cc60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CookingTime: 10
+  OvercookedThreshold: 5
+  CircularProgressBarPrefab: {fileID: 5263431006640829832, guid: c729ef058ce331942a42ec434c96b566,
+    type: 3}
+  RawMaterial: {fileID: 2100000, guid: bde41bb8e18a34e288eb14cc6a6ff235, type: 2}
+  CookedMaterial: {fileID: 2100000, guid: 29096583c9b5143db9f0a43ce6eb859e, type: 2}
+  BurntMaterial: {fileID: 2100000, guid: 2e5926a2d7d22824aace8fc378c52550, type: 2}
 --- !u!1 &3551181729984530228
 GameObject:
   m_ObjectHideFlags: 0
