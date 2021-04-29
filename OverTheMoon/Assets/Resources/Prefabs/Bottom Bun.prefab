@@ -105,14 +105,14 @@ MonoBehaviour:
   foodType: 5
   MeatPrefab: {fileID: 910016387258734053, guid: f0ea995e09a314ffdbc251df32e1341f,
     type: 3}
-  LettucePrefab: {fileID: 5585868938327327599, guid: 6f7196f9ba734461bbca91d7335b77bf,
+  LettucePrefab: {fileID: 5151499024361960679, guid: d20ed9fd2a4d24b07b05081d58e33db6,
     type: 3}
-  TopBunPrefab: {fileID: 1114457128278635576, guid: 26952ed1615364440ac7a18fc9d21756,
+  TopBunPrefab: {fileID: 2566721156174667821, guid: 26952ed1615364440ac7a18fc9d21756,
     type: 3}
   BottomBunPrefab: {fileID: 4899323302845872992}
-  TomatoPrefab: {fileID: 748716289993058345, guid: 68d29c2334cc74e208030f6f2cf1efa0,
+  TomatoPrefab: {fileID: 3769304495648172534, guid: 68d29c2334cc74e208030f6f2cf1efa0,
     type: 3}
-  CheesePrefab: {fileID: 623772603211508840, guid: 2761bc21813884c569b8544655ab4989,
+  CheesePrefab: {fileID: 5919251800332751863, guid: 243c0c465862b4ebf92086ad0a2f935c,
     type: 3}
 --- !u!1 &6171309246841902414
 GameObject:
