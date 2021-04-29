@@ -35,7 +35,8 @@ public class PlayerLoader : MonoBehaviour
 {
     public static PlayerLoader Instance;
 
-    private string API_URL = "http://localhost:3000/api/user";
+    // private string API_URL = "http://localhost:3000/api/user";
+    private string API_URL = "https://overthemoon.giraffesyo.dev/api/user";
     private Player player;
 
     public string Username => player.Name;
