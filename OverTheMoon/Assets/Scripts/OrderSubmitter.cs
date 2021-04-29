@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -9,17 +10,18 @@ public class OrderSubmitter : MonoBehaviour
 {
     [SerializeField] private GameObject OrdersManagerObject;
     [SerializeField] private AudioClip SuccessSound;
+    [SerializeField] private TextMeshPro PointsDisplay;
 
     private AudioSource Audio;
     private OrderManger OrdersManager;
     
     private void Awake()
     {
+        PointsDisplay.gameObject.SetActive(false);
         if (!TryGetComponent<AudioSource>(out Audio))
         {
             Audio = gameObject.AddComponent<AudioSource>();
         }
-
 
         if (!OrdersManagerObject.TryGetComponent<OrderManger>(out OrdersManager))
         {
@@ -52,8 +54,20 @@ public class OrderSubmitter : MonoBehaviour
     {
         PlaySound(SuccessSound);
         OrdersManager.RemoveOrder(outstandingOrder);
+        StartCoroutine(ShowPoints((Order)outstandingOrder));
         Destroy(preparedOrder.gameObject);
         Destroy(outstandingOrder.gameObject);
+    }
+
+    private IEnumerator ShowPoints(Order submittedOrder)
+    {
+        var submission = submittedOrder.GetSubmissionInfo();
+        PointsDisplay.gameObject.SetActive(true);
+        PointsDisplay.text = $"+ {submission.Value}";
+        PointsDisplay.gameObject.transform.LookAt(Camera.main.transform);
+        // PointsDisplay.gameObject.transform.localEulerAngles = new Vector3(0, 180, 0);
+        yield return new WaitForSeconds(5f);
+        PointsDisplay.gameObject.SetActive(false);
     }
 
     private void PlaySound(AudioClip clip)

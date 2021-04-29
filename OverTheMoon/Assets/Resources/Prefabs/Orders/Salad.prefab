@@ -149,8 +149,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OrderedRecipeIngredients:
-  - {fileID: 5585868938327327599, guid: 6f7196f9ba734461bbca91d7335b77bf, type: 3}
-  - {fileID: 748716289993058345, guid: 68d29c2334cc74e208030f6f2cf1efa0, type: 3}
+  - {fileID: 5151499024361960679, guid: d20ed9fd2a4d24b07b05081d58e33db6, type: 3}
+  - {fileID: 3769304495648172534, guid: 68d29c2334cc74e208030f6f2cf1efa0, type: 3}
   SecondsUntilExpiration: 40
   CompletionValue: 10
   DisplayText: {fileID: 8023198218563855981}

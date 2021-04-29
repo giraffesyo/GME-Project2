@@ -1,11 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum FridgeItemType
 {
-    FIRST_MEAT,
-    SECOND_MEAT,
+    MEAT,
     TOP_BUN,
     BOTTOM_BUN,
     LETTUCE,
@@ -23,9 +24,7 @@ public class FridgeScript : MonoBehaviour
     [SerializeField]
     private Transform LettuceSpawnPoint;
     [SerializeField]
-    private Transform FirstMeatSpawnPoint;
-    [SerializeField]
-    private Transform SecondMeatSpawnPoint;
+    private Transform MeatSpawnPoint;
     [SerializeField]
     private Transform TomatoSpawnPoint;
     [SerializeField]
@@ -44,86 +43,72 @@ public class FridgeScript : MonoBehaviour
     [SerializeField]
     private GameObject CheesePrefab;
 
+    [SerializeField] private float RespawnTime = 5f;
+    private List<Transform> SpawnPoints => new List<Transform>()
+    {
+        TopBunSpawnPoint,  BottomBunSpawnPoint, LettuceSpawnPoint, MeatSpawnPoint, TomatoSpawnPoint, CheeseSpawnPoint
+    };
+
+    private List<GameObject> PrefabsToSpawn => new List<GameObject>()
+    {
+        TopBunPrefab, BottomBunPrefab, LettucePrefab, MeatPrefab, TomatoPrefab, CheesePrefab
+    };
+
+    public List<GameObject> SpawnedFood = new List<GameObject>();
+    
     // spawn all the food items at once
-    void SpawnAll()
+    private void SpawnAll()
     {
-        foreach (FridgeItemType food in System.Enum.GetValues(typeof(FridgeItemType)))
+        foreach (var foodToSpawn in PrefabsToSpawn)
         {
-            Spawn(food);
+            Spawn(foodToSpawn);
         }
     }
 
-    private void Spawn(FridgeItemType food)
+    private void Spawn(GameObject food)
     {
-        switch (food)
-        {
-            case FridgeItemType.FIRST_MEAT:
-                {
-                    GameObject obj = Instantiate(MeatPrefab, FirstMeatSpawnPoint.position, Quaternion.identity);
-                    obj.name = MeatPrefab.name;
-                    obj.transform.eulerAngles = MeatPrefab.transform.eulerAngles;
-                    break;
-                }
-            case FridgeItemType.SECOND_MEAT:
-                {
-                    GameObject obj = Instantiate(MeatPrefab, SecondMeatSpawnPoint.position, Quaternion.identity);
-                    obj.name = MeatPrefab.name;
-                    obj.transform.eulerAngles = MeatPrefab.transform.eulerAngles;
-                    break;
-                }
-            case FridgeItemType.BOTTOM_BUN:
-                {
-                    GameObject obj = Instantiate(BottomBunPrefab, BottomBunSpawnPoint.position, Quaternion.identity);
-                    obj.name = BottomBunPrefab.name;
-                    obj.transform.eulerAngles = BottomBunPrefab.transform.eulerAngles;
-                    break;
-                }
-            case FridgeItemType.TOP_BUN:
-                {
-                    GameObject obj = Instantiate(TopBunPrefab, TopBunSpawnPoint.position, Quaternion.identity);
-                    obj.name = TopBunPrefab.name;
-                    obj.transform.eulerAngles = TopBunPrefab.transform.eulerAngles;
-                    break;
-                }
-            case FridgeItemType.LETTUCE:
-                {
-                    GameObject obj = Instantiate(LettucePrefab, LettuceSpawnPoint.position, Quaternion.identity);
-                    obj.name = LettucePrefab.name;
-                    obj.transform.eulerAngles = LettucePrefab.transform.eulerAngles;
-                    break;
-                }
-            case FridgeItemType.CHEESE:
-                {
-                    GameObject obj = Instantiate(CheesePrefab, CheeseSpawnPoint.position, Quaternion.identity);
-                    obj.name = CheesePrefab.name;
-                    obj.transform.eulerAngles = CheesePrefab.transform.eulerAngles;
-                    break;
-                }
-            case FridgeItemType.TOMATO:
-                {
-                    GameObject obj = Instantiate(TomatoPrefab, TomatoSpawnPoint.position, Quaternion.identity);
-                    obj.name = TomatoPrefab.name;
-                    obj.transform.eulerAngles = TomatoPrefab.transform.eulerAngles;
-                    break;
-                }
-            default:
-                {
-                    Debug.LogError("Fell to default case in Spawn food component of fridge script");
-                    break;
-                }
-        }
+        var spawnPoint = SpawnPoints.FirstOrDefault(x => x.name == food.name);
+        if (spawnPoint == null) return;
+        
+        GameObject spawnedFood = Instantiate(food, spawnPoint);
+        spawnedFood.transform.parent = null;
+        spawnedFood.name = food.name;
+        spawnedFood.transform.eulerAngles = food.transform.eulerAngles;
+        SpawnedFood.Add(spawnedFood);
     }
 
+    private void RespawnAsNeeded()
+    {
+        var foodsToSpawn = new List<GameObject>();
+        foreach (var food in SpawnedFood)
+        {
+            if (food.TryGetComponent<BurgerComponent>(out var burgerComponent) && burgerComponent.HasBeenManipulated)
+            {
+                foodsToSpawn.Add(food);
+                continue;
+            }
+            
+            // for the burger, since it doesnt have a burgercomponent script on the object
+            burgerComponent = food.GetComponentInChildren<BurgerComponent>();
+            if (burgerComponent != null && burgerComponent.isManipulated)
+            {
+                foodsToSpawn.Add(food);
+            }
+        }
+
+        var foodPrefabs = foodsToSpawn.Select(x => PrefabsToSpawn.FirstOrDefault(y => x.name == y.name))
+            .Where(x => x != null);
+        SpawnedFood = SpawnedFood.Where(x => !foodsToSpawn.Contains(x)).ToList();
+        foreach (var foodToSpawn in foodPrefabs)
+        {
+            Spawn(foodToSpawn);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         SpawnAll();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        InvokeRepeating(nameof(RespawnAsNeeded), RespawnTime, RespawnTime);
     }
 }
